@@ -1,0 +1,9 @@
+FROM mrshellcyp/openvscode-go
+
+RUN yum -y install openssh-server openssh-clients && \
+    ssh-keygen -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -P "" && \
+    ssh-keygen -t ecdsa -b 256 -f /etc/ssh/ssh_host_ecdsa_key -P "" && \
+    ssh-keygen -t ed25519 -b 256 -f /etc/ssh/ssh_host_ed25519_key -P "" && \
+    echo "root:mrshell" | chpasswd
+
+EXPOSE 22
