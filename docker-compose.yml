@@ -1,0 +1,9 @@
+version: '3'
+services:
+  ide:
+    image: mrshellcyp/openvscode-go
+    build: .
+    ports:
+      - "3000:3000"
+    command: --connection-token mrshell
+    # privileged: true
