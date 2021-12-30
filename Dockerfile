@@ -15,8 +15,13 @@ RUN tar xzf openvscode-server-v${RELEASE_TAG}-linux-x64.tar.gz && \
 RUN yum -y update; exit 0
 RUN yum -y install https://repo.ius.io/ius-release-el7.rpm && \
     rpm --rebuilddb && \
-    yum -y install make gcc git224
-ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+    yum -y install make gcc git224 kde-l10n-Chinese && \
+    yum -y reinstall glibc-common && \
+    localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
+
+ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH \
+    LANG=zh_CN.utf8 \
+    LC_ALL=zh_CN.utf8
 
 EXPOSE 3000
 
