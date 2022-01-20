@@ -20,8 +20,7 @@ RUN yum -y install https://repo.ius.io/ius-release-el7.rpm && \
     localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
 
 ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH \
-    LANG=zh_CN.utf8 \
-    LC_ALL=zh_CN.utf8
+    LANG=zh_CN.utf8
 
 EXPOSE 3000
 
