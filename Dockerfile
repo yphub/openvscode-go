@@ -1,7 +1,7 @@
-FROM centos:centos7.2.1511
+FROM ubuntu:20.04
 
 ENV RELEASE_TAG=1.70.0 \
-    GOVERSION=1.19 \
+    GOVERSION=1.18.5 \
     GOROOT=/home/go \
     GOPATH=/home/go-tools \
     GOPROXY=https://goproxy.cn,direct
@@ -12,14 +12,10 @@ RUN tar xzf openvscode-server-v${RELEASE_TAG}-linux-x64.tar.gz && \
     tar xzf go${GOVERSION}.linux-amd64.tar.gz -C /home && \
     rm -f *.tar.gz && \
     mv /openvscode-server-v${RELEASE_TAG}-linux-x64 /openvscode
-RUN yum -y update; exit 0
 
-RUN yum -y install https://repo.ius.io/ius-release-el7.rpm && \
-    rpm --rebuilddb && \
-    yum -y install make gcc git236
-#     yum -y install make gcc git224 kde-l10n-Chinese && \
-#     yum -y reinstall glibc-common && \
-#     localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
+RUN apt-get update && apt-get -y install git make gcc
+
+USER mrshell
 
 ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 # LANG=zh_CN.utf8
